@@ -1,12 +1,20 @@
 defmodule LopesUiWeb.Router do
   use LopesUiWeb, :router
 
+  import Phoenix.LiveView.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :liveview do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
   end
 
   pipeline :api do
@@ -16,7 +24,9 @@ defmodule LopesUiWeb.Router do
   scope "/", LopesUiWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/home", HomeController, :index
+    # get "/topic", TopicController, :index
+    # get "/topic/:topic", TopicController, :detailed
   end
 
   # Other scopes may use custom stacks.

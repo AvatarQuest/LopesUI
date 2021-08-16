@@ -12,9 +12,10 @@ defmodule LopesUi.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: LopesUi.PubSub},
       # Start the Endpoint (http/https)
-      LopesUiWeb.Endpoint
+      LopesUiWeb.Endpoint,
       # Start a worker by calling: LopesUi.Worker.start_link(arg)
-      # {LopesUi.Worker, arg}
+      LopesUI.ROS.TopicPipeline,
+      {LopesUI.ROS.Rosbridge, "ws://localhost:9090"}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -30,3 +31,6 @@ defmodule LopesUi.Application do
     :ok
   end
 end
+#  sub = %Subscriber{name: "/test", type: "std_msgs/Int32"}
+# alias LopesUI.ROS.Topic.Subscriber
+#  GenServer.cast(LopesUI.ROS.TopicPipeline, {:subscribe, sub})
