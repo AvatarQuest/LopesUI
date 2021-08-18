@@ -15,15 +15,23 @@ defmodule LopesUI.ROS.TopicPipeline do
   @impl true
   # @spec handle_cast({:subscribe, sub}, Enum) :: {:noreply, Enum}
   def handle_cast({:subscribe, topic}, state) do
-    IO.inspect topic
+    IO.puts "Subscribing: #{inspect topic}"
     LopesUI.ROS.Rosbridge.send_json(%{"op" =>  "subscribe", "topic" => topic.name, "type" => topic.type})
-    IO.puts "Sent websocket command"
     {:noreply, [topic | state]}
   end
 
+  def handle_cast({:value, topic}, state) do
+    wanted_topics = Enum.filter(state, &(&1.name == Map.get(topic, "topic")))
+    Process.send(List.first(wanted_topics).pid, {:update, topic}, [])
+    {:noreply, state}
+  end
+
   @impl true
-  def handle_cast({:remove, topic}, state) do
-    {:noreply, Enum.filter(state, fn x -> x != topic end)}
+  def handle_cast({:unsubscribe, pid}, state) do
+    removed_topic = Enum.find(state, &(&1.pid == pid))
+    IO.puts "Unsubscribing: #{inspect removed_topic}"
+    LopesUI.ROS.Rosbridge.send_json(%{"op" =>  "unsubscribe", "topic" => removed_topic.name, "type" => removed_topic.type})
+    {:noreply, List.delete(state, removed_topic)}
   end
 
   @impl true
@@ -32,8 +40,11 @@ defmodule LopesUI.ROS.TopicPipeline do
   end
 
   def subscribe(topic) do
-    IO.inspect topic
     GenServer.cast(TopicPipeline, {:subscribe, topic})
+  end
+
+  def unsubscribe(pid) do
+    GenServer.cast(TopicPipeline, {:unsubscribe, pid})
   end
 
   def list do

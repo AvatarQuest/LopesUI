@@ -1,8 +1,13 @@
 <div>
   <div class>
     <button phx-click="github_deploy">Deploy to GitHub</button>
-    <div class="github-deploy">
-      Status: <%= @progress %>
+    <div class="listtopics">
+      <%= @topic_name %>: <%= @progress %>
     </div>
+    <form phx-change="validate" phx-submit="subscribe">
+      <input type="text" name="user[topic]" />
+      <input type="text" name="user[type]"/>
+      <%= submit "Save" %>
+    </form>
   </div>
 </div>

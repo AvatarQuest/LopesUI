@@ -6,12 +6,13 @@ defmodule LopesUI.ROS.Rosbridge do
   end
 
   def handle_frame({type, msg}, state) do
-    IO.puts "Received Message - Type: #{inspect type} -- Message: #{inspect msg}"
+    # IO.puts "Received Message - Type: #{inspect type} -- Message: #{inspect msg}"
+    GenServer.cast(TopicPipeline, {:value, msg |> Jason.decode!})
     {:ok, state}
   end
 
   def handle_cast({:send, {type, msg} = frame}, state) do
-    IO.puts "Sending #{type} frame with payload: #{msg}"
+    # IO.puts "Sending #{type} frame with payload: #{msg}"
     {:reply, frame, state}
   end
 
