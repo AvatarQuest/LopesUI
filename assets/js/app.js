@@ -1,4 +1,6 @@
 // assets/js/app.js
+import css from "../css/app.scss"
+import 'bootstrap';
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 
