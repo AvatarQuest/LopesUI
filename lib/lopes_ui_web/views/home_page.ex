@@ -13,26 +13,34 @@ defmodule LopesUIWeb.HomePage do
   def handle_info({:update, topic}, socket) do
     # IO.puts "UPDATING RN"
     # IO.inspect topic |> Map.get("msg") |> Map.get("data")
-    # {:ok, temperature} = Thermostat.get_reading(socket.assigns.user_id)
-    {:noreply, assign(socket, :progress, "#{topic |> Map.get("msg") |> Map.get("data")}")}
+    {:noreply, assign(socket, :value, "#{topic |> Map.get("msg") |> Map.get("data")}")}
   end
 
-  def terminate(reason, socket) do
+  def terminate(_reason, _socket) do
     LopesUI.ROS.TopicPipeline.unsubscribe(self())
   end
 
-  def handle_event("validate", %{"user" => params}, socket) do
+  def handle_event("validate", %{"form" => _params}, socket) do
     {:noreply, socket}
   end
 
-  def handle_event("subscribe", %{"user" => %{"topic" => topic, "type" => type}}, socket) do
-    IO.puts "fsdhjafhjksdhkj"
+  def handle_event("subscribe", %{"form" => %{"topic" => topic, "type" => type}}, socket) do
+    LopesUI.ROS.TopicPipeline.unsubscribe(self())
     LopesUI.ROS.TopicPipeline.subscribe(%{name: topic, type: type, pid: self()})
-    {:noreply, assign(socket, :topic_name, topic)}
+    {:noreply, assign(socket, subscribe_topic: topic, value: "Waiting for message...")}
   end
 
+  def handle_event("publish", %{"form" => %{"topic" => topic, "value" => value}}, socket) do
+    LopesUI.ROS.TopicPipeline.advertise(%{name: topic, type: "std_msgs/Int32", pid: self()})
+    {data, _} = Integer.parse(value)
+    LopesUI.ROS.TopicPipeline.publish(%{name: topic, type: "std_msgs/Int32", msg: %{"data" => data}})
+    {:noreply, assign(socket, publish_topic: topic)}
+  end
   def mount(_params, _session, socket) do
-    LopesUI.ROS.TopicPipeline.subscribe(%{name: "/set_speed", type: "std_msgs/Int32", pid: self()})
-    {:ok, assign(socket, progress: "Waiting for message...", topic_name: "/set_speed")}
+    publish_name = "/test"
+    subscribe_topic = "/test"
+    LopesUI.ROS.TopicPipeline.subscribe(%{name: subscribe_topic, type: "std_msgs/Int32", pid: self()})
+    LopesUI.ROS.TopicPipeline.advertise(%{name: publish_name, type: "std_msgs/Int32", pid: self()})
+    {:ok, assign(socket, publish_topic: publish_name, value: "Waiting for message...", subscribe_topic: subscribe_topic)}
   end
 end
