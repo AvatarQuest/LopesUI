@@ -57,6 +57,10 @@ defmodule LopesUI.ROS.TopicPipeline do
     GenServer.cast(TopicPipeline, {:subscribe, topic})
   end
 
+  def publish(topic) do
+    GenServer.cast(TopicPipeline, {:publish, topic})
+  end
+
   def advertise(topic) do
     GenServer.cast(TopicPipeline, {:advertise, topic})
   end
