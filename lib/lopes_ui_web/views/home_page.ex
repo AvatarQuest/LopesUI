@@ -13,26 +13,26 @@ defmodule LopesUIWeb.HomePage do
   def handle_info({:update, topic}, socket) do
     # IO.puts "UPDATING RN"
     # IO.inspect topic |> Map.get("msg") |> Map.get("data")
-    # {:ok, temperature} = Thermostat.get_reading(socket.assigns.user_id)
-    {:noreply, assign(socket, :progress, "#{topic |> Map.get("msg") |> Map.get("data")}")}
+    {:noreply, assign(socket, :value, "#{topic |> Map.get("msg") |> Map.get("data")}")}
   end
 
-  def terminate(reason, socket) do
+  def terminate(_reason, _socket) do
     LopesUI.ROS.TopicPipeline.unsubscribe(self())
   end
 
-  def handle_event("validate", %{"user" => params}, socket) do
+  def handle_event("validate", %{"form" => _params}, socket) do
     {:noreply, socket}
   end
 
-  def handle_event("subscribe", %{"user" => %{"topic" => topic, "type" => type}}, socket) do
-    IO.puts "fsdhjafhjksdhkj"
+  def handle_event("subscribe", %{"form" => %{"topic" => topic, "type" => type}}, socket) do
+    LopesUI.ROS.TopicPipeline.unsubscribe(self())
     LopesUI.ROS.TopicPipeline.subscribe(%{name: topic, type: type, pid: self()})
-    {:noreply, assign(socket, :topic_name, topic)}
+    {:noreply, assign(socket, topic_name: topic, value: "Waiting for message...")}
   end
 
   def mount(_params, _session, socket) do
     LopesUI.ROS.TopicPipeline.subscribe(%{name: "/set_speed", type: "std_msgs/Int32", pid: self()})
-    {:ok, assign(socket, progress: "Waiting for message...", topic_name: "/set_speed")}
+    LopesUI.ROS.TopicPipeline.advertise(%{name: "/test", type: "std_msgs/Int32", pid: self()})
+    {:ok, assign(socket, value: "Waiting for message...", topic_name: "/set_speed")}
   end
 end
