@@ -1,5 +1,5 @@
 <div>
-  <div class>
+  <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
     <button phx-click="github_deploy">Deploy to GitHub</button>
     <div class="listtopics">
       <%= @subscribe_topic %>: <%= @value%>
@@ -8,13 +8,13 @@
     <form phx-change="validate" phx-submit="subscribe">
       <input type="text" name="form[topic]" />
       <input type="text" name="form[type]"/>
-      <%= submit "Save" %>
+      <button type="submit" class="btn btn-green" phx-disable-with="Saving...">Save</button>
     </form>
    Publishing to <%= @publish_topic %>
     <form phx-change="validate" phx-submit="publish">
       <input type="text" name="form[topic]" />
       <input type="text" name="form[value]" />
-      <%= submit "Save" %>
+      <button type="submit" class="btn btn-green" phx-disable-with="Saving...">Save</button>
     </form>
   </div>
 </div>
