@@ -15,7 +15,8 @@ defmodule LopesUi.Application do
       LopesUiWeb.Endpoint,
       # Start a worker by calling: LopesUi.Worker.start_link(arg)
       LopesUI.ROS.TopicPipeline,
-      # {LopesUI.ROS.Rosbridge, "ws://localhost:9090"}
+      # LopesUI.ROS.TopicPipeline,
+      {LopesUI.ROS.Rosbridge, "ws://localhost:9090"}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
