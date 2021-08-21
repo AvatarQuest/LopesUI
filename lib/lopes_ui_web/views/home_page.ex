@@ -2,7 +2,7 @@ defmodule LopesUIWeb.HomePage do
   use Phoenix.LiveView
 
   def render(assigns) do
-    LopesUiWeb.PageView.render("debug_page.html", assigns)
+    LopesUiWeb.PageView.render("dashboard_page.html", assigns)
   end
 
   def handle_event("listtopics", _value, socket) do
@@ -27,7 +27,7 @@ defmodule LopesUIWeb.HomePage do
   def handle_event("subscribe", %{"form" => %{"topic" => topic, "type" => type}}, socket) do
     LopesUI.ROS.TopicPipeline.unsubscribe(self())
     LopesUI.ROS.TopicPipeline.subscribe(%{name: topic, type: type, pid: self()})
-    {:noreply, assign(socket, subscribe_topic: topic, value: "Waiting for message...")}
+    {:noreply, assign(socket, subscribe_topic: topic, value: "Waiting...")}
   end
 
   def handle_event("publish", %{"form" => %{"topic" => topic, "value" => value}}, socket) do
@@ -41,6 +41,6 @@ defmodule LopesUIWeb.HomePage do
     subscribe_topic = "/test"
     LopesUI.ROS.TopicPipeline.subscribe(%{name: subscribe_topic, type: "std_msgs/Int32", pid: self()})
     LopesUI.ROS.TopicPipeline.advertise(%{name: publish_name, type: "std_msgs/Int32", pid: self()})
-    {:ok, assign(socket, publish_topic: publish_name, value: "Waiting for message...", subscribe_topic: subscribe_topic)}
+    {:ok, assign(socket, publish_topic: publish_name, value: "Waiting...", subscribe_topic: subscribe_topic, type: "std_msgs/Int32")}
   end
 end
