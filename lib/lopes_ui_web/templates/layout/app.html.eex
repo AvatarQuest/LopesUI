@@ -8,12 +8,7 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <%= csrf_meta_tag() %>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-    <style>
-      .small-image {
-        width: 400px;
-        height: 400px;
-      }
-    </style>
+
   </head>
   <body>
     <header>
@@ -27,7 +22,7 @@
           </ul>
         </nav>
         <a href="https://phoenixframework.org/" class="phx-logo">
-          <img class="small-image" src="<%= Routes.static_path(@conn, "/images/alex.jpeg") %>" alt="Jacker Nopes Image"/>
+          <img class="alex-logo" src="<%= Routes.static_path(@conn, "/images/alex.jpeg") %>" alt="Jacker Nopes Image"/>
         </a>
       </section>
     </header>
