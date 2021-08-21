@@ -1,5 +1,51 @@
-<div class="grid grid-flow-col grid-cols-2 grid-rows-2 gap-4">
-  <div class="max-w-md mx-auto bg-blue-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+<div class="grid grid-flow-col grid-cols-3 grid-rows-3 gap-4">
+  <div class="max-w-md mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="listtopics">
+      <%= @subscribe_topic %>: <%= @value%>
+    </div>
+    <div>
+      Subscribe
+      <form phx-change="validate" phx-submit="subscribe" class="w-full max-w-sm">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[type]"/>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+    <div>
+      Publishing to <%= @publish_topic %>
+      <form phx-change="validate" phx-submit="publish">
+      <div class="flex items-center border-b border-teal-500 py-2">
+        <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="/topic" aria-label="Topic Name" type="text" name="form[topic]" />
+        <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" placeholder="std_msgs/Int32" aria-label="Topic Type" type="text" name="form[value]" />
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="max-w-md mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="listtopics">
+      <%= @subscribe_topic %>: <%= @value%>
+    </div>
+    <div>
+      Subscribe
+      <form phx-change="validate" phx-submit="subscribe" class="w-full max-w-sm">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[type]"/>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+    <div>
+      Publishing to <%= @publish_topic %>
+      <form phx-change="validate" phx-submit="publish">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[value]" />
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="max-w-md mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
     <div class="listtopics">
       <%= @subscribe_topic %>: <%= @value%>
     </div>
@@ -21,7 +67,7 @@
     </div>
   </div>
 
-  <div class="max-w-md mx-auto bg-blue-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+  <div class="max-w-md mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
     <div class="listtopics">
       <%= @subscribe_topic %>: <%= @value%>
     </div>
@@ -43,7 +89,95 @@
     </div>
   </div>
 
-  <div class="max-w-md mx-auto bg-blue-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+  <div class="max-w-md mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="listtopics">
+      <%= @subscribe_topic %>: <%= @value%>
+    </div>
+    <div>
+      Subscribe
+      <form phx-change="validate" phx-submit="subscribe">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[type]"/>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+    <div>
+      Publishing to <%= @publish_topic %>
+      <form phx-change="validate" phx-submit="publish">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[value]" />
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="max-w-md mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="listtopics">
+      <%= @subscribe_topic %>: <%= @value%>
+    </div>
+    <div>
+      Subscribe
+      <form phx-change="validate" phx-submit="subscribe">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[type]"/>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+    <div>
+      Publishing to <%= @publish_topic %>
+      <form phx-change="validate" phx-submit="publish">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[value]" />
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="max-w-md mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="listtopics">
+      <%= @subscribe_topic %>: <%= @value%>
+    </div>
+    <div>
+      Subscribe
+      <form phx-change="validate" phx-submit="subscribe">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[type]"/>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+    <div>
+      Publishing to <%= @publish_topic %>
+      <form phx-change="validate" phx-submit="publish">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[value]" />
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="max-w-md mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <div class="listtopics">
+      <%= @subscribe_topic %>: <%= @value%>
+    </div>
+    <div>
+      Subscribe
+      <form phx-change="validate" phx-submit="subscribe">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[type]"/>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+    <div>
+      Publishing to <%= @publish_topic %>
+      <form phx-change="validate" phx-submit="publish">
+        <input type="text" name="form[topic]" />
+        <input type="text" name="form[value]" />
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-disable-with="Saving...">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="max-w-md mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
     <div class="listtopics">
       <%= @subscribe_topic %>: <%= @value%>
     </div>

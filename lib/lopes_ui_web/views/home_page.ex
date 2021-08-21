@@ -2,7 +2,7 @@ defmodule LopesUIWeb.HomePage do
   use Phoenix.LiveView
 
   def render(assigns) do
-    LopesUiWeb.PageView.render("home_page.html", assigns)
+    LopesUiWeb.PageView.render("debug_page.html", assigns)
   end
 
   def handle_event("listtopics", _value, socket) do
