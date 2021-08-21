@@ -24,7 +24,7 @@ defmodule LopesUiWeb.Router do
   scope "/", LopesUiWeb do
     pipe_through :browser
 
-    get "/dashboard", HomeController, :index
+    get "/dash", HomeController, :index
     get "/launch", LaunchController, :index
     # get "/topic", TopicController, :index
     # get "/topic/:topic", TopicController, :detailed
