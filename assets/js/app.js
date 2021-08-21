@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
@@ -14,11 +13,6 @@ import "../css/app.scss"
 //     import socket from "./socket"
 //
 import "phoenix_html"
-=======
-// assets/js/app.js
-import css from "../css/app.scss"
-import 'bootstrap';
->>>>>>> main
 import {Socket} from "phoenix"
 // import topbar from "topbar"
 import {LiveSocket} from "phoenix_live_view"
