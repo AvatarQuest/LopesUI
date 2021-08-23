@@ -9,6 +9,19 @@
     height: 30px;
 }
 
+.bottom-align {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 150px;
+    height: 150px;
+    border: solid 1px red;
+  }
+
+.info {
+    padding-top: 20px;
+}
+
 // @import "./phoenix.css";
 
 /* Alerts and form errors */
