@@ -1,4 +1,5 @@
 defmodule LopesUIWeb.HomePage do
+  alias LopesUI.ROS.Topic
   use Phoenix.LiveView
 
   def render(assigns) do
@@ -26,21 +27,21 @@ defmodule LopesUIWeb.HomePage do
 
   def handle_event("subscribe", %{"form" => %{"topic" => topic, "type" => type}}, socket) do
     LopesUI.ROS.TopicPipeline.unsubscribe(self())
-    LopesUI.ROS.TopicPipeline.subscribe(%{name: topic, type: type, pid: self()})
+    LopesUI.ROS.TopicPipeline.subscribe(%Topic.Subscribe{name: topic, type: type, pid: self()})
     {:noreply, assign(socket, subscribe_topic: topic, value: "Waiting...")}
   end
 
   def handle_event("publish", %{"form" => %{"topic" => topic, "value" => value}}, socket) do
-    LopesUI.ROS.TopicPipeline.advertise(%{name: topic, type: "std_msgs/Int32", pid: self()})
+    LopesUI.ROS.TopicPipeline.advertise(%Topic.Subscribe{name: topic, type: "std_msgs/Int32", pid: self()})
     {data, _} = Integer.parse(value)
-    LopesUI.ROS.TopicPipeline.publish(%{name: topic, type: "std_msgs/Int32", msg: %{"data" => data}})
+    LopesUI.ROS.TopicPipeline.publish(%Topic.Publish{name: topic, type: "std_msgs/Int32", msg: %{"data" => data}})
     {:noreply, assign(socket, publish_topic: topic)}
   end
   def mount(_params, _session, socket) do
     publish_name = "/test"
     subscribe_topic = "/test"
-    LopesUI.ROS.TopicPipeline.subscribe(%{name: subscribe_topic, type: "std_msgs/Int32", pid: self()})
-    LopesUI.ROS.TopicPipeline.advertise(%{name: publish_name, type: "std_msgs/Int32", pid: self()})
+    LopesUI.ROS.TopicPipeline.subscribe(%Topic.Subscribe{name: subscribe_topic, type: "std_msgs/Int32", pid: self()})
+    LopesUI.ROS.TopicPipeline.advertise(%Topic.Subscribe{name: publish_name, type: "std_msgs/Int32", pid: self()})
     {:ok, assign(socket, publish_topic: publish_name, value: "Waiting...", subscribe_topic: subscribe_topic, type: "std_msgs/Int32")}
   end
 end
