@@ -108,7 +108,7 @@
       </div>
     </div>
   </nav>
-    <header>
+    <!-- <header>
       <section class="container">
         <nav role="navigation">
           <ul>
@@ -121,7 +121,7 @@
         <a href="https://phoenixframework.org/">
           <img class="alex-logo" src="<%= Routes.static_path(@conn, "/images/alex.jpeg") %>" alt="Jacker Nopes Image"/>
         </a>
-      </section>
+      </section> -->
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
