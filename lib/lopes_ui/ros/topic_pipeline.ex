@@ -1,7 +1,7 @@
 defmodule LopesUI.ROS.TopicPipeline do
   use GenServer
 
-  @type sub :: %LopesUI.ROS.Topic.Subscriber{name: String, type: String}
+  @type sub :: %LopesUI.ROS.Topic.Subscribe{name: String, type: String}
 
   def start_link(state \\ []) do
     GenServer.start_link(__MODULE__, state,  name: TopicPipeline)
