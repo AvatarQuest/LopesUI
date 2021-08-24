@@ -1,17 +1,99 @@
-<div class="grid grid-flow-col grid-cols-4 grid-rows-3 gap-y-10 ">
-  <div class="w-60 h-40 mx-auto bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-xl shadow-md overflow-hidden ">
-    <div>
-        <p class="text-5xl m-3">
-            <%= @value %>
-        </p>
-    </div>
-    <div class="align-text-bottom">
-        <p class="m-3 info">
-            Topic: <%= @subscribe_topic %>
-            <br>
-            Type: <%= @type %>
-        </p>
+<div class="min-h-screen w-full space-y-12 pt-10">
+  <div class="container mx-auto">
+    <div class="bg-white max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
+      <div class="h-20 bg-red-500 flex items-center justify-between">
+        <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">1</h1>
+        <p class="mr-20 text-white text-lg">Agenda/Topic</p>
+        <p class="mr-4 text-white font-thin text-lg">Settings</p>
+      </div>
+
+      <p class="py-6 text-lg tracking-wide ml-16"><%= @value %></p>
+      <!-- <hr > -->
+      <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
+        <p>Topic</p>
+        <p><%= @type %> </p>
+      </div>
     </div>
   </div>
 
-</div>
+  <div class="container mx-auto">
+    <div class="bg-white max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
+      <div class="h-20 bg-green-500 flex items-center justify-between">
+        <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">2</h1>
+        <p class="mr-20 text-white text-lg">Agenda/Topic</p>
+        <p class="mr-4 text-white font-thin text-lg">Settings</p>
+      </div>
+
+      <p class="py-6 text-lg tracking-wide ml-16"> <%= @value %></p>
+      <!-- <hr > -->
+      <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
+        <p>Topic </p>
+        <p> <%= @type %> </p>
+      </div>
+    </div>
+  </div>
+  <div class="container mx-auto">
+    <div class="bg-white max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
+      <div class="h-20 bg-purple-500 flex items-center justify-between">
+        <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">3</h1>
+        <p class="mr-20 text-white text-lg">Agenda/Topic</p>
+        <p class="mr-4 text-white font-thin text-lg">Settings</p>
+      </div>
+
+      <p class="py-6 text-lg tracking-wide ml-16"><%= @value %></p>
+      <!-- <hr > -->
+      <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
+        <p>Topic </p>
+        <p> <%= @type %> </p>
+      </div>
+    </div>
+
+<div class="container mx-auto">
+    <div class="bg-white max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
+      <div class="h-20 bg-red-500 flex items-center justify-between">
+        <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">1</h1>
+        <p class="mr-20 text-white text-lg">Agenda/Topic</p>
+        <p class="mr-4 text-white font-thin text-lg">Settings</p>
+      </div>
+
+      <p class="py-6 text-lg tracking-wide ml-16"><%= @value %></p>
+      <!-- <hr > -->
+      <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
+        <p>Topic</p>
+        <p><%= @type %> </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto">
+    <div class="bg-white max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
+      <div class="h-20 bg-green-500 flex items-center justify-between">
+        <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">2</h1>
+        <p class="mr-20 text-white text-lg">Agenda/Topic</p>
+        <p class="mr-4 text-white font-thin text-lg">Settings</p>
+      </div>
+
+      <p class="py-6 text-lg tracking-wide ml-16"> <%= @value %></p>
+      <!-- <hr > -->
+      <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
+        <p>Topic </p>
+        <p> <%= @type %> </p>
+      </div>
+    </div>
+  </div>
+  <div class="container mx-auto">
+    <div class="bg-white max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:scale-105 cursor-pointer">
+      <div class="h-20 bg-purple-500 flex items-center justify-between">
+        <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">3</h1>
+        <p class="mr-20 text-white text-lg">Agenda/Topic</p>
+        <p class="mr-4 text-white font-thin text-lg">Settings</p>
+      </div>
+
+      <p class="py-6 text-lg tracking-wide ml-16"><%= @value %></p>
+      <!-- <hr > -->
+      <div class="flex justify-between px-5 mb-2 text-sm text-gray-600">
+        <p>Topic </p>
+        <p> <%= @type %> </p>
+      </div>
+    </div>
+  </div>
