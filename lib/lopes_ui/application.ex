@@ -15,7 +15,7 @@ defmodule LopesUi.Application do
       LopesUiWeb.Endpoint,
       # Start a worker by calling: LopesUi.Worker.start_link(arg)
       LopesUI.ROS.TopicPipeline,
-      # LopesUI.ROS.TopicPipeline,
+      LopesUI.ROS.Dashboard,
       {LopesUI.ROS.Rosbridge, "ws://localhost:9090"}
     ]
 

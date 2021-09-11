@@ -12,7 +12,7 @@ defmodule LopesUI.ROS.Rosbridge do
   end
 
   def handle_cast({:send, {type, msg} = frame}, state) do
-    IO.puts "Sending #{type} frame with payload: #{msg}"
+    # IO.puts "Sending #{type} frame with payload: #{msg}"
     {:reply, frame, state}
   end
 
