@@ -45,7 +45,7 @@ defmodule LopesUIWeb.HomePage do
     {:noreply, assign(socket, subscribe_topic: topic, value: "Waiting...")}
   end
 
-  def handle_event("publish", %{"form" => %{"topic" => topic, "value" => value}}, socket) do
+  def handle_event("publish", %{"form" => %{"card" => topic, "value" => value}}, socket) do
     LopesUI.ROS.TopicPipeline.advertise(%Topic.Subscribe{name: topic, type: "std_msgs/Int32", pid: self()})
     {data, _} = Integer.parse(value)
     LopesUI.ROS.TopicPipeline.publish(%Topic.Publish{name: topic, type: "std_msgs/Int32", msg: %{"data" => data}})
@@ -53,11 +53,11 @@ defmodule LopesUIWeb.HomePage do
   end
 
   def mount(_params, _session, socket) do
-    opts1 = [topic1: "/send_vector", v1: "Waiting...", type1: "geometry_msgs/Vector3", action1: "subscribe"]
-    opts2 = [topic2: "/set_twist", v2: "Waiting...", type2: "geometry_msgs/Twist", action2: "subscribe"]
-    opts3 = [topic3: "/set_topic", v3: "Waiting...", type3: "std_msgs/Int32", action3: "subscribe"]
-    opts4 = [topic4: "/set_topic", v4: "Waiting...", type4: "std_msgs/Int32", action4: "subscribe"]
-    opts5 = [topic5: "/set_topic", v5: "Waiting...", type5: "std_msgs/Int32", action5: "subscribe"]
+    opts1 = [topic1: "/index", v1: "Waiting...", type1: "std_msgs/Float64", action1: "subscribe"]
+    opts2 = [topic2: "/middle", v2: "Waiting...", type2: "std_msgs/Float64", action2: "subscribe"]
+    opts3 = [topic3: "/ring", v3: "Waiting...", type3: "std_msgs/Float64", action3: "subscribe"]
+    opts4 = [topic4: "/pinky", v4: "Waiting...", type4: "std_msgs/Float64", action4: "subscribe"]
+    opts5 = [topic5: "/thumb", v5: "Waiting...", type5: "std_msgs/Float64", action5: "subscribe"]
     opts6 = [topic6: "/set_topic", v6: "Waiting...", type6: "std_msgs/Int32", action6: "subscribe"]
 
     LopesUI.ROS.Dashboard.put(:card1, opts1)
@@ -65,6 +65,7 @@ defmodule LopesUIWeb.HomePage do
     LopesUI.ROS.Dashboard.put(:card3, opts3)
     LopesUI.ROS.Dashboard.put(:card4, opts4)
     LopesUI.ROS.Dashboard.put(:card5, opts5)
+    LopesUI.ROS.Dashboard.put(:card6, opts6)
 
     opts = opts1 ++ opts2 ++ opts3 ++ opts4 ++ opts5 ++ opts6
     LopesUI.ROS.TopicPipeline.subscribe(%Topic.Subscribe{name: opts1[:topic1], type: opts1[:type1], pid: self()})
@@ -75,10 +76,6 @@ defmodule LopesUIWeb.HomePage do
     LopesUI.ROS.TopicPipeline.subscribe(%Topic.Subscribe{name: opts6[:topic6], type: opts6[:type6], pid: self()})
 
     {:ok, assign(socket, opts)}
-  end
-
-  def activate_card() do
-
   end
 
 end
