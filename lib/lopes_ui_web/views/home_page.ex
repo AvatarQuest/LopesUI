@@ -2,6 +2,10 @@ defmodule LopesUIWeb.HomePage do
   alias LopesUI.ROS.Topic
   use Phoenix.LiveView
 
+  def convert_msg(msg) do
+    msg |> Map.keys() |> Enum.map(fn key -> "#{key}: #{msg[key]}" end) |> Enum.join(", ")
+  end
+
   def render(assigns) do
     LopesUiWeb.PageView.render("dashboard_page.html", assigns)
   end
@@ -12,7 +16,8 @@ defmodule LopesUIWeb.HomePage do
   end
 
   def handle_info({:update, topic}, socket) do
-    data = topic |> Map.get("msg") |> Map.get("data")
+    msg = topic |> Map.get("msg")
+    data = convert_msg(msg)
     %{"topic" => topic} = topic
 
     changes = []
@@ -48,8 +53,8 @@ defmodule LopesUIWeb.HomePage do
   end
 
   def mount(_params, _session, socket) do
-    opts1 = [topic1: "/set_topic", v1: "Waiting...", type1: "std_msgs/Int32", action1: "subscribe"]
-    opts2 = [topic2: "/set_topic", v2: "Waiting...", type2: "std_msgs/Int32", action2: "subscribe"]
+    opts1 = [topic1: "/send_vector", v1: "Waiting...", type1: "geometry_msgs/Vector3", action1: "subscribe"]
+    opts2 = [topic2: "/set_twist", v2: "Waiting...", type2: "geometry_msgs/Twist", action2: "subscribe"]
     opts3 = [topic3: "/set_topic", v3: "Waiting...", type3: "std_msgs/Int32", action3: "subscribe"]
     opts4 = [topic4: "/set_topic", v4: "Waiting...", type4: "std_msgs/Int32", action4: "subscribe"]
     opts5 = [topic5: "/set_topic", v5: "Waiting...", type5: "std_msgs/Int32", action5: "subscribe"]

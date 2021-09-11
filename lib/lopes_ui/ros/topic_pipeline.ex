@@ -35,7 +35,6 @@ defmodule LopesUI.ROS.TopicPipeline do
   def handle_cast({:value, topic}, state) do
     IO.puts "Recieved value: #{inspect topic}"
     wanted_topics = Enum.filter(state, &(&1.name == Map.get(topic, "topic")))
-    # IO.puts "Sending to #{inspect wanted_topics}"
     Process.send(List.first(wanted_topics).pid, {:update, topic}, [])
     {:noreply, state}
   end
