@@ -21,6 +21,7 @@ defmodule LopesUIWeb.HomePage do
     changes = if (LopesUI.ROS.Dashboard.get(:card3)[:topic3] == topic), do: changes ++ [v3: "#{data}"], else: changes
     changes = if (LopesUI.ROS.Dashboard.get(:card4)[:topic4] == topic), do: changes ++ [v4: "#{data}"], else: changes
     changes = if (LopesUI.ROS.Dashboard.get(:card5)[:topic5] == topic), do: changes ++ [v5: "#{data}"], else: changes
+    changes = if (LopesUI.ROS.Dashboard.get(:card6)[:topic6] == topic), do: changes ++ [v6: "#{data}"], else: changes
 
     {:noreply, assign(socket, changes)}
   end
