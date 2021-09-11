@@ -71,7 +71,7 @@
         <div class="px-2 bg-gradient-to-br from-pink-400 to-red-600 flex h-20  items-center justify-between">
           <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">4</h1>
           <p class="ml-4 text-white uppercase"><%= @topic4 %></p>
-          <button type="button" class="items-right border border-white text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-black hover:bg-white focus:outline-none focus:shadow-outline">
+          <button id="btn4" type="button" class="items-right border border-white text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-black hover:bg-white focus:outline-none focus:shadow-outline">
             Settings
           </button>
         </div>
@@ -89,7 +89,7 @@
         <div class="px-2 bg-gradient-to-br from-blue-300 to-green-300 flex h-20  items-center justify-between">
           <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">5</h1>
           <p class="ml-4 text-white uppercase"><%= @topic5 %></p>
-          <button type="button" class="items-right border border-white text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-black hover:bg-white focus:outline-none focus:shadow-outline">
+          <button id="btn5" type="button" class="items-right border border-white text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-black hover:bg-white focus:outline-none focus:shadow-outline">
             Settings
           </button>
         </div>
@@ -107,7 +107,7 @@
         <div class="px-2 bg-gradient-to-br from-yellow-100 to-yellow-700 flex h-20  items-center justify-between">
           <h1 class="text-white ml-4 border-2 py-2 px-4 rounded-full">6</h1>
           <p class="ml-4 text-white uppercase"><%= @topic6 %></p>
-          <button type="button" class="items-right border border-white text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-black hover:bg-white focus:outline-none focus:shadow-outline">
+          <button id="btn6" type="button" class="items-right border border-white text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-black hover:bg-white focus:outline-none focus:shadow-outline">
             Settings
           </button>
         </div>
@@ -315,6 +315,198 @@
         </div>
       </div>
   </div>
+  <div id="modal4" class="modal flex flex-col justify-center w-screen h-screen items-center antialiased">
+      <div class="mt-20 flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">
+        <div
+          class="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg"
+        >
+          <p class="font-semibold text-gray-800">Edit topic</p>
+          <svg
+            class="close4 w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </div>
+        <div class="flex flex-col px-6 py-5 bg-gray-50">
+          <p class="mb-2 font-semibold text-gray-700">Publish to topic</p>
+          <textarea
+            type="text"
+            name=""
+            placeholder="Type message..."
+            class="p-5 mb-5 bg-white border border-gray-200 rounded shadow-sm h-36"
+            id=""
+          ></textarea>
+          <button class="px-4 py-2 text-white font-semibold bg-blue-500 rounded mb-4">
+            Publish
+          </button>
+          <hr class="mb-4" />
+          <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+            <div class="w-full sm:w-1/2">
+              <p class="mb-2 font-semibold text-gray-700">Topic Name</p>
+              <input
+                type="text"
+                name=""
+                class="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none"
+                value="<%= @topic4 %>"
+                id=""
+              >
+              </input>
+            </div>
+            <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+              <p class="mb-2 font-semibold text-gray-700">Type Name</p>
+              <input
+                type="text"
+                name=""
+                class="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none"
+                value="<%= @type4 %>"
+                id=""
+              >
+              </input>
+            </div>
+          </div>
+          <button class="close4 px-4 py-2 text-white font-semibold bg-blue-500 rounded mb-4" >
+            Save
+          </button>
+        </div>
+      </div>
+  </div>
+  <div id="modal5" class="modal flex flex-col justify-center w-screen h-screen items-center antialiased">
+      <div class="mt-20 flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">
+        <div
+          class="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg"
+        >
+          <p class="font-semibold text-gray-800">Edit topic</p>
+          <svg
+            class="close5 w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </div>
+        <div class="flex flex-col px-6 py-5 bg-gray-50">
+          <p class="mb-2 font-semibold text-gray-700">Publish to topic</p>
+          <textarea
+            type="text"
+            name=""
+            placeholder="Type message..."
+            class="p-5 mb-5 bg-white border border-gray-200 rounded shadow-sm h-36"
+            id=""
+          ></textarea>
+          <button class="px-4 py-2 text-white font-semibold bg-blue-500 rounded mb-4">
+            Publish
+          </button>
+          <hr class="mb-4" />
+          <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+            <div class="w-full sm:w-1/2">
+              <p class="mb-2 font-semibold text-gray-700">Topic Name</p>
+              <input
+                type="text"
+                name=""
+                class="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none"
+                value="<%= @topic5 %>"
+                id=""
+              >
+              </input>
+            </div>
+            <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+              <p class="mb-2 font-semibold text-gray-700">Type Name</p>
+              <input
+                type="text"
+                name=""
+                class="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none"
+                value="<%= @type5 %>"
+                id=""
+              >
+              </input>
+            </div>
+          </div>
+          <button class="close5 px-4 py-2 text-white font-semibold bg-blue-500 rounded mb-4" >
+            Save
+          </button>
+        </div>
+      </div>
+  </div>
+  <div id="modal6" class="modal flex flex-col justify-center w-screen h-screen items-center antialiased">
+      <div class="mt-20 flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">
+        <div
+          class="flex flex-row justify-between p-6 bg-white border-b border-gray-200 rounded-tl-lg rounded-tr-lg"
+        >
+          <p class="font-semibold text-gray-800">Edit topic</p>
+          <svg
+            class="close6 w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </div>
+        <div class="flex flex-col px-6 py-5 bg-gray-50">
+          <p class="mb-2 font-semibold text-gray-700">Publish to topic</p>
+          <textarea
+            type="text"
+            name=""
+            placeholder="Type message..."
+            class="p-5 mb-5 bg-white border border-gray-200 rounded shadow-sm h-36"
+            id=""
+          ></textarea>
+          <button class="px-4 py-2 text-white font-semibold bg-blue-500 rounded mb-4">
+            Publish
+          </button>
+          <hr class="mb-4" />
+          <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
+            <div class="w-full sm:w-1/2">
+              <p class="mb-2 font-semibold text-gray-700">Topic Name</p>
+              <input
+                type="text"
+                name=""
+                class="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none"
+                value="<%= @topic6 %>"
+                id=""
+              >
+              </input>
+            </div>
+            <div class="w-full sm:w-1/2 mt-2 sm:mt-0">
+              <p class="mb-2 font-semibold text-gray-700">Type Name</p>
+              <input
+                type="text"
+                name=""
+                class="w-full p-5 bg-white border border-gray-200 rounded shadow-sm appearance-none"
+                value="<%= @type6 %>"
+                id=""
+              >
+              </input>
+            </div>
+          </div>
+          <button class="close6 px-4 py-2 text-white font-semibold bg-blue-500 rounded mb-4" >
+            Save
+          </button>
+        </div>
+      </div>
+  </div>
 </div>
 
 <script>
@@ -393,6 +585,84 @@ span3.onclick = function() {
 window.onclick = function(event) {
   if (event.target == modal) {
     modal3.style.display = "none";
+  }
+}
+
+// Get the modal
+var modal4 = document.getElementById("modal4");
+
+// Get the button that opens the modal
+var btn4 = document.getElementById("btn4");
+
+// Get the <span> element that closes the modal
+var span4 = document.getElementsByClassName("close4")[0];
+
+// When the user clicks on the button, open the modal
+btn4.onclick = function() {
+  modal4.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span4.onclick = function() {
+  modal4.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal4.style.display = "none";
+  }
+}
+
+// Get the modal
+var modal5 = document.getElementById("modal5");
+
+// Get the button that opens the modal
+var btn5 = document.getElementById("btn5");
+
+// Get the <span> element that closes the modal
+var span5 = document.getElementsByClassName("close5")[0];
+
+// When the user clicks on the button, open the modal
+btn5.onclick = function() {
+  modal5.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span5.onclick = function() {
+  modal5.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal5.style.display = "none";
+  }
+}
+
+// Get the modal
+var modal6 = document.getElementById("modal6");
+
+// Get the button that opens the modal
+var btn6 = document.getElementById("btn6");
+
+// Get the <span> element that closes the modal
+var span6 = document.getElementsByClassName("close6")[0];
+
+// When the user clicks on the button, open the modal
+btn6.onclick = function() {
+  modal6.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span6.onclick = function() {
+  modal6.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal6.style.display = "none";
   }
 }
 </script>
