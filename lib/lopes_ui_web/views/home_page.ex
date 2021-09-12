@@ -3,18 +3,12 @@ defmodule LopesUIWeb.HomePage do
   use Phoenix.LiveView
 
   def convert_msg(msg) do
-    msg |> Map.keys() |> Enum.map(fn key -> "#{key}: #{msg[key]}" end) |> Enum.join(", ")
+    msg |> Map.keys() |> Enum.map(fn key -> "#{key}: #{msg[key]}" end) |> Enum.join(",")
   end
 
   def render(assigns) do
     LopesUiWeb.PageView.render("dashboard_page.html", assigns)
   end
-
-  def handle_event("listtopics", _value, socket) do
-    [topic | _] = LopesUI.ROS.TopicPipeline.list
-    {:noreply, assign(socket, progress: topic.name)}
-  end
-
   def handle_info({:update, topic}, socket) do
     msg = topic |> Map.get("msg")
     data = convert_msg(msg)
@@ -35,7 +29,21 @@ defmodule LopesUIWeb.HomePage do
     LopesUI.ROS.TopicPipeline.unsubscribe(self())
   end
 
-  def handle_event("validate", %{"form" => _params}, socket) do
+  def handle_event("publish1", %{"form" => %{"value" => value}}, socket) do
+    card = LopesUI.ROS.Dashboard.get(:card1)
+    IO.inspect(value)
+    msg = value
+    msg = if String.contains?(card[:type1], "std_msgs"), do: %{"data" => value}, else: msg
+    msg = if String.contains?(card[:type1], "std_msgs/Int"), do: %{"data" => String.to_integer(value)}, else: msg
+    msg = if String.contains?(card[:type1], "std_msgs/Float"), do: %{"data" => String.to_float(value)}, else: msg
+    msg = if String.contains?(card[:type1], "geometry_msgs/Vector3"), do: %{"x" => String.split(value, ",")[0] |> String.to_float, "y" => String.split(value, ",")[1] |> String.to_float, "z" => String.split(value, ",")[2] |> String.to_float}, else: msg
+    IO.inspect(msg)
+    LopesUI.ROS.TopicPipeline.advertise(%Topic.Subscribe{name: card[:topic1], type: card[:type1], pid: self()})
+    LopesUI.ROS.TopicPipeline.publish(%Topic.Publish{name: card[:topic1], type: card[:type1], msg: msg})
+    {:noreply, socket}
+  end
+
+  def handle_event("validate", _, socket) do
     {:noreply, socket}
   end
 
@@ -45,20 +53,13 @@ defmodule LopesUIWeb.HomePage do
     {:noreply, assign(socket, subscribe_topic: topic, value: "Waiting...")}
   end
 
-  def handle_event("publish", %{"form" => %{"card" => topic, "value" => value}}, socket) do
-    LopesUI.ROS.TopicPipeline.advertise(%Topic.Subscribe{name: topic, type: "std_msgs/Int32", pid: self()})
-    {data, _} = Integer.parse(value)
-    LopesUI.ROS.TopicPipeline.publish(%Topic.Publish{name: topic, type: "std_msgs/Int32", msg: %{"data" => data}})
-    {:noreply, assign(socket, publish_topic: topic)}
-  end
-
   def mount(_params, _session, socket) do
-    opts1 = [topic1: "/index", v1: "Waiting...", type1: "std_msgs/Float64", action1: "subscribe"]
-    opts2 = [topic2: "/middle", v2: "Waiting...", type2: "std_msgs/Float64", action2: "subscribe"]
-    opts3 = [topic3: "/ring", v3: "Waiting...", type3: "std_msgs/Float64", action3: "subscribe"]
+    opts1 = [topic1: "/thumb_middle", v1: "Waiting...", type1: "geometry_msgs/Vector3" , action1: "subscribe"]
+    opts2 = [topic2: "/thumb_middle", v2: "Waiting...", type2: "geometry_msgs/Vector3", action2: "subscribe"]
+    opts3 = [topic3: "/test", v3: "Waiting...", type3: "std_msgs/Int32", action3: "subscribe"]
     opts4 = [topic4: "/pinky", v4: "Waiting...", type4: "std_msgs/Float64", action4: "subscribe"]
     opts5 = [topic5: "/thumb", v5: "Waiting...", type5: "std_msgs/Float64", action5: "subscribe"]
-    opts6 = [topic6: "/set_topic", v6: "Waiting...", type6: "std_msgs/Int32", action6: "subscribe"]
+    opts6 = [topic6: "/claw_angle", v6: "Waiting...", type6: "std_msgs/Float64", action6: "subscribe"]
 
     LopesUI.ROS.Dashboard.put(:card1, opts1)
     LopesUI.ROS.Dashboard.put(:card2, opts2)

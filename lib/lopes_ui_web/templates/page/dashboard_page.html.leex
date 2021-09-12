@@ -146,16 +146,13 @@
         </div>
         <div class="flex flex-col px-6 py-5 bg-gray-50">
           <p class="mb-2 font-semibold text-gray-700">Publish to topic</p>
-          <textarea
-            type="text"
-            name=""
-            placeholder="Type message..."
-            class="p-5 mb-5 bg-white border border-gray-200 rounded shadow-sm h-36"
-            id=""
-          ></textarea>
-          <button class="px-4 py-2 text-white font-semibold bg-blue-500 rounded mb-4">
-            Publish
-          </button>
+            <form phx-submit="publish1">
+              <input type="text" name="form[value]" placeholder="Type message..." class="p-5 mb-5 bg-white border border-gray-200 rounded shadow-sm h-36">
+              <%# <input type="text" name="form[text]"/> %>
+              <button type="submit" class="px-4 py-2 text-white font-semibold bg-blue-500 rounded mb-4">
+                Publish
+              </button>
+            </form>
           <hr class="mb-4" />
           <div class="flex flex-col sm:flex-row items-center mb-5 sm:space-x-5">
             <div class="w-full sm:w-1/2">
