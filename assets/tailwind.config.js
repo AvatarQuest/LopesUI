@@ -11,6 +11,7 @@ module.exports = {
         backgroundImage: {
          'lucas-ui': "url('/images/lucas-ui.png')",
          'valleyfire': "url('/images/valleyfire.png')",
+         'innovation-pano': "url('/images/innovation-pano.png')",
         },
         backgroundPosition: {
           bottom: 'bottom',
