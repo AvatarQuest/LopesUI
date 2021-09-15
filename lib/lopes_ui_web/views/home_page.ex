@@ -9,6 +9,7 @@ defmodule LopesUIWeb.HomePage do
   def convert_msg(msg) do
     msg |> Map.keys() |> Enum.map(fn key -> "#{key}: #{msg[key]}" end) |> Enum.join(",")
   end
+
   def handle_info({:update, topic}, socket) do
     msg = topic |> Map.get("msg")
     data = convert_msg(msg)
@@ -31,13 +32,13 @@ defmodule LopesUIWeb.HomePage do
 
   def handle_event("publish1", %{"form" => %{"value" => value}}, socket) do
     card = LopesUI.ROS.Dashboard.get(:card1)
-    IO.inspect(value)
+
     msg = value
     msg = if String.contains?(card[:type1], "std_msgs"), do: %{"data" => value}, else: msg
     msg = if String.contains?(card[:type1], "std_msgs/Int"), do: %{"data" => String.to_integer(value)}, else: msg
     msg = if String.contains?(card[:type1], "std_msgs/Float"), do: %{"data" => String.to_float(value)}, else: msg
     msg = if String.contains?(card[:type1], "geometry_msgs/Vector3"), do: %{"x" => String.split(value, ",")[0] |> String.to_float, "y" => String.split(value, ",")[1] |> String.to_float, "z" => String.split(value, ",")[2] |> String.to_float}, else: msg
-    IO.inspect(msg)
+
     LopesUI.ROS.TopicPipeline.advertise(%Topic.Subscribe{name: card[:topic1], type: card[:type1], pid: self()})
     LopesUI.ROS.TopicPipeline.publish(%Topic.Publish{name: card[:topic1], type: card[:type1], msg: msg})
     {:noreply, socket}
