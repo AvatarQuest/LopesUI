@@ -1,7 +1,6 @@
 defmodule LopesUI.ROS.Dashboard do
   use Agent
 
-  @spec start_link(any) :: none
   def start_link(opts \\ []) do
     Agent.start_link(fn -> %{} end, name: __MODULE__, opts: opts)
   end

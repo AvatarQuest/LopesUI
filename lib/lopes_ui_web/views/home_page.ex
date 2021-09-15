@@ -2,12 +2,12 @@ defmodule LopesUIWeb.HomePage do
   alias LopesUI.ROS.Topic
   use Phoenix.LiveView
 
-  def convert_msg(msg) do
-    msg |> Map.keys() |> Enum.map(fn key -> "#{key}: #{msg[key]}" end) |> Enum.join(",")
-  end
-
   def render(assigns) do
     LopesUiWeb.PageView.render("dashboard_page.html", assigns)
+  end
+
+  def convert_msg(msg) do
+    msg |> Map.keys() |> Enum.map(fn key -> "#{key}: #{msg[key]}" end) |> Enum.join(",")
   end
   def handle_info({:update, topic}, socket) do
     msg = topic |> Map.get("msg")

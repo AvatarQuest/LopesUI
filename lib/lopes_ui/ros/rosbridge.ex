@@ -1,7 +1,7 @@
 defmodule LopesUI.ROS.Rosbridge do
   use WebSockex
 
-  def start_link(url \\ "ws://0.0.0.0:9090", state) do
+  def start_link(url, state) do
     WebSockex.start_link(url, __MODULE__, state, name: Rosbridge)
   end
 
