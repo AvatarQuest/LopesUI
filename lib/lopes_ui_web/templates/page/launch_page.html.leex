@@ -27,9 +27,10 @@
       </div>
     </div>
     <div class="flex items-center justify-between p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-      <span class="text-3xl text-extrabold">E-stop 🔊 (<%= @audio_status %>)</span>
+      <span class="text-3xl text-extrabold">E-stop 🛑(<%= @audio_status %>)</span>
       <div class="bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-        <button phx-click="audio"><%= if @audio_status == "Started", do: "Kill", else: "Launch" %></button>
+        <button phx-click="audio"><%= if @audio_status == "Started", do: "Kill", else: "Terminate all" %></button>
       </div>
     </div>
+    <br>
 </div>
