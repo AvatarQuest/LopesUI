@@ -3,7 +3,7 @@
     <h1 class="text-center mt-10 text-4xl font-bold">Launch Files</h1>
     <div class="flex items-center justify-between p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
       <span class="text-3xl text-extrabold">Arm 💪 (<%= @arm_status %>)</span>
-      <div class="bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer <%= if @arm_status == "Started", do: "border-red-600"%>
+      <div class="bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer ">
         <button phx-click="arm"><%= if @arm_status == "Started", do: "Kill", else: "Launch" %></button>
       </div>
     </div>
