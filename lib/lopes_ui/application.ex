@@ -17,6 +17,7 @@ defmodule LopesUi.Application do
       LopesUI.ROS.TopicPipeline,
       LopesUI.ROS.Dashboard,
       LopesUI.ROS.Launch,
+      {LopesUI.ROS.ProcessManager, %{}},
       # {LopesUI.ROS.Rosbridge, ""}
     ]
 
