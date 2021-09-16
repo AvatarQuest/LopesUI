@@ -11,33 +11,33 @@
     <h1 class="text-center mt-10 text-4xl font-bold">Launch Files</h1>
     <div class="<%= if @arm_status == "Started", do: "border-4 border-green-600", else: "border-4 border-red-600" %> flex items-center justify-between p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
       <span class="text-3xl text-extrabold">Arm 💪</span>
-      <div class="bg-red-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
+      <div class="bg-pink-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
         <button phx-click="arm"><%= if @arm_status == "Started", do: "Kill", else: "Launch" %></button>
       </div>
     </div>
-    <div class="<%= if @arm_status == "Started", do: "border-4 border-green-600", else: "border-4 border-red-600" %> flex items-center justify-between p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-      <span class="text-3xl text-extrabold">Drivetrain 🚚 (<%= @drivetrain_status %>)</span>
+    <div class="<%= if @drivetrain_status == "Started", do: "border-4 border-green-600", else: "border-4 border-red-600" %> flex items-center justify-between p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
+      <span class="text-3xl text-extrabold">Drivetrain 🚚</span>
       <div class="bg-green-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
         <button phx-click="drivetrain"><%= if @drivetrain_status == "Started", do: "Kill", else: "Launch" %></button>
       </div>
     </div>
 
-    <div class="<%= if @drivetrain_status == "Started", do: "border-4 border-green-600", else: "border-4 border-red-600" %> flex items-center justify-between p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-      <span class="text-3xl text-extrabold">Vision 👀 (<%= @vision_status %>) </span>
+    <div class="<%= if @vision_status == "Started", do: "border-4 border-green-600", else: "border-4 border-red-600" %> flex items-center justify-between p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
+      <span class="text-3xl text-extrabold">Vision 👀</span>
       <div class="bg-purple-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
         <button phx-click="vision"><%= if @vision_status == "Started", do: "Kill", else: "Launch" %></button>
       </div>
     </div>
-    <div class="<%= if @vision_status == "Started", do: "border-4 border-green-600", else: "border-4 border-red-600" %> flex items-center justify-between p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
+    <div class="<%= if @audio_status == "Started", do: "border-4 border-green-600", else: "border-4 border-red-600" %> flex items-center justify-between p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
       <span class="text-3xl text-extrabold">Audio 🔊</span>
         <div class="font-medium">
-          Client: <%= @audio_status %>
+          Client:
           <div class="text-center py-3 px-5 bg-yellow-500 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
             <button phx-click="audio_client"><%= if @audio_status == "Started", do: "Kill", else: "Launch" %></button>
           </div>
         </div>
         <div class="font-medium w-25">
-          Server: <%= @audio_status %>
+          Server:
           <div class="text-center py-3 px-5 bg-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
             <button phx-click="audio_server"><%= if @audio_status == "Started", do: "Kill", else: "Launch" %></button>
           </div>

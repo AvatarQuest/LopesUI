@@ -37,8 +37,10 @@ defmodule LopesUIWeb.LaunchPage do
 
   def handle_event("arm", _unsigned_params, socket) do
     if not LopesUI.ROS.Launch.is_on(:arm) do
-      :os.cmd('roslaunch arm arm.launch')
-      LopesUI.ROS.Launch.start(:arm)
+      LopesUI.ROS.ProcessManager.start_process(%{name: :arm, cmd: "/Users/adityapawar/Documents/GitHub/A1S_App/env/bin/scrapyd", args: []})
+      # LopesUI.ROS.ProcessManager.start_process(%{name: :arm, cmd: "roslaunch", args: ["arm", "arm.launch"]})
+    else
+      LopesUI.ROS.ProcessManager.terminate_process(:arm)
     end
     IO.puts "arm"
     {:noreply, socket}
@@ -46,8 +48,10 @@ defmodule LopesUIWeb.LaunchPage do
 
   def handle_event("drivetrain", _unsigned_params, socket) do
     if not LopesUI.ROS.Launch.is_on(:drivetrain) do
-      :os.cmd('roslaunch drivetrain drivetrain.launch')
-      LopesUI.ROS.Launch.start(:drivetrain)
+      LopesUI.ROS.ProcessManager.start_process(%{name: :drivetrain, cmd: "/Users/adityapawar/Documents/GitHub/A1S_App/env/bin/scrapyd", args: []})
+      # LopesUI.ROS.ProcessManager.start_process(%{name: :drivetrain, cmd: "roslaunch", args: ["drivetrain", "arm.launch"]})
+    else
+      LopesUI.ROS.ProcessManager.terminate_process(:drivetrain)
     end
     IO.puts "drivetrain"
     {:noreply, socket}
@@ -55,8 +59,10 @@ defmodule LopesUIWeb.LaunchPage do
 
   def handle_event("vision", _unsigned_params, socket) do
     if not LopesUI.ROS.Launch.is_on(:vision) do
-      :os.cmd('roslaunch vision vision.launch')
-      LopesUI.ROS.Launch.start(:vision)
+      LopesUI.ROS.ProcessManager.start_process(%{name: :vision, cmd: "/Users/adityapawar/Documents/GitHub/A1S_App/env/bin/scrapyd", args: []})
+      # LopesUI.ROS.ProcessManager.start_process(%{name: :vision, cmd: "roslaunch", args: ["vision", "vision.launch"]})
+    else
+      LopesUI.ROS.ProcessManager.terminate_process(:vision)
     end
     IO.puts "vision"
     {:noreply, socket}
@@ -64,8 +70,10 @@ defmodule LopesUIWeb.LaunchPage do
 
   def handle_event("audio", _unsigned_params, socket) do
     if not LopesUI.ROS.Launch.is_on(:audio) do
-      # :os.cmd('roslaunch drivetrain drivetrain.launch')
-      LopesUI.ROS.Launch.start(:audio)
+      LopesUI.ROS.ProcessManager.start_process(%{name: :audio, cmd: "/Users/adityapawar/Documents/GitHub/A1S_App/env/bin/scrapyd", args: []})
+      # LopesUI.ROS.ProcessManager.start_process(%{name: :audio, cmd: "roslaunch", args: ["audio", "audio.launch"]})
+    else
+      LopesUI.ROS.ProcessManager.terminate_process(:audio)
     end
     IO.puts "audio"
     {:noreply, socket}

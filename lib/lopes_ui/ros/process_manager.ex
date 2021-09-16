@@ -46,11 +46,9 @@ defmodule LopesUI.ROS.ProcessManager do
 
   @impl true
   def handle_cast({:close, name} , state) do
-    IO.puts "#{inspect Map.get(state, name)}"
     %{port: port} = Map.get(state, name)
     if not is_nil(port) do
       pid = Port.info(port) |> Keyword.get(:os_pid)
-      IO.inspect pid
       Port.close(port)
       System.cmd("kill", ["-9", "#{pid}"])
     end
