@@ -23,10 +23,20 @@ defmodule LopesUI.ROS.ProcessManager do
   end
 
   def delete(name) do
-    GenServer.cast(ProcessManaget, {:delete, name})
+    GenServer.cast(ProcessManager, {:delete, name})
   end
   def get_state do
     GenServer.call(ProcessManager, {:state})
+  end
+
+  def kill_all do
+    GenServer.cast(ProcessManager, {:kill_all})
+  end
+
+  @impl true
+  def handle_cast({:kill_all}, state) do
+    Enum.map(state, fn {k, _} -> LopesUI.ROS.ProcessManager.terminate_process(k) end)
+    {:noreply, state}
   end
 
   @impl true
@@ -46,13 +56,15 @@ defmodule LopesUI.ROS.ProcessManager do
 
   @impl true
   def handle_cast({:close, name} , state) do
-    %{port: port} = Map.get(state, name)
+    port = Map.get(state, name)
     if not is_nil(port) do
+      %{port: port} = port
       pid = Port.info(port) |> Keyword.get(:os_pid)
       Port.close(port)
       System.cmd("kill", ["-9", "#{pid}"])
     end
 
+    state = Map.update!(state, name, fn value -> Map.update!(value, :logs, fn logs -> logs <> "\n" <> "PROCESS KILLED BY USER" end) end)
     LopesUI.ROS.Launch.terminate(name)
     {:noreply, Map.delete(state, name)}
   end

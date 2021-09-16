@@ -2,7 +2,7 @@ defmodule LopesUI.ROS.Launch do
   use Agent
 
   def start_link(opts \\ {}) do
-    Agent.start_link(fn -> %{arm: false, drivetrain: false, vision: false, audio: false, pids: []} end, name: __MODULE__, opts: opts)
+    Agent.start_link(fn -> %{arm: false, drivetrain: false, vision: false, audio_server: false, audio_client: false, rosbridge: false, pids: []} end, name: __MODULE__, opts: opts)
   end
 
   def start(key) do

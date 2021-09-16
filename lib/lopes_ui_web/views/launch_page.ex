@@ -6,15 +6,21 @@ defmodule LopesUIWeb.LaunchPage do
   end
 
   def mount(_params, _session, socket) do
+    rosbridge_status = if LopesUI.ROS.Launch.is_on(:rosbridge), do: "Started", else: "Not Started"
     arm_status = if LopesUI.ROS.Launch.is_on(:arm), do: "Started", else: "Not Started"
     drivetrain_status = if LopesUI.ROS.Launch.is_on(:drivetrain), do: "Started", else: "Not Started"
     vision_status = if LopesUI.ROS.Launch.is_on(:vision), do: "Started", else: "Not Started"
-    audio_status = if LopesUI.ROS.Launch.is_on(:audio), do: "Started", else: "Not Started"
+    audio_server_status = if LopesUI.ROS.Launch.is_on(:audio_server), do: "Started", else: "Not Started"
+    audio_client_status = if LopesUI.ROS.Launch.is_on(:audio_client), do: "Started", else: "Not Started"
 
     LopesUI.ROS.Launch.register(self())
-    {:ok, assign(socket, arm_status: arm_status, drivetrain_status: drivetrain_status, vision_status: vision_status, audio_status: audio_status)}
+    {:ok, assign(socket, rosbridge_status: rosbridge_status, arm_status: arm_status, drivetrain_status: drivetrain_status, vision_status: vision_status, audio_client_status: audio_client_status, audio_server_status: audio_server_status)}
   end
 
+  def handle_info({:rosbridge, update}, socket) do
+    msg = if update, do: "Started", else: "Not started"
+    {:noreply, assign(socket, rosbridge_status: msg)}
+  end
   def handle_info({:arm, update}, socket) do
     msg = if update, do: "Started", else: "Not started"
     {:noreply, assign(socket, arm_status: msg)}
@@ -30,9 +36,14 @@ defmodule LopesUIWeb.LaunchPage do
     {:noreply, assign(socket, vision_status: msg)}
   end
 
-  def handle_info({:audio, update}, socket) do
+  def handle_info({:audio_server, update}, socket) do
     msg = if update, do: "Started", else: "Not started"
-    {:noreply, assign(socket, audio_status: msg)}
+    {:noreply, assign(socket, audio_server_status: msg)}
+  end
+
+  def handle_info({:audio_client, update}, socket) do
+    msg = if update, do: "Started", else: "Not started"
+    {:noreply, assign(socket, audio_client_status: msg)}
   end
 
   def handle_event("arm", _unsigned_params, socket) do
@@ -68,17 +79,45 @@ defmodule LopesUIWeb.LaunchPage do
     {:noreply, socket}
   end
 
-  def handle_event("audio", _unsigned_params, socket) do
-    if not LopesUI.ROS.Launch.is_on(:audio) do
-      LopesUI.ROS.ProcessManager.start_process(%{name: :audio, cmd: "/Users/adityapawar/Documents/GitHub/A1S_App/env/bin/scrapyd", args: []})
+  def handle_event("audio_server", _unsigned_params, socket) do
+    if not LopesUI.ROS.Launch.is_on(:audio_server) do
+      LopesUI.ROS.ProcessManager.start_process(%{name: :audio_server, cmd: "/Users/adityapawar/Documents/GitHub/A1S_App/env/bin/scrapyd", args: []})
       # LopesUI.ROS.ProcessManager.start_process(%{name: :audio, cmd: "roslaunch", args: ["audio", "audio.launch"]})
     else
-      LopesUI.ROS.ProcessManager.terminate_process(:audio)
+      LopesUI.ROS.ProcessManager.terminate_process(:audio_server)
     end
-    IO.puts "audio"
+    IO.puts "audio server"
     {:noreply, socket}
   end
 
+  def handle_event("audio_client", _unsigned_params, socket) do
+    if not LopesUI.ROS.Launch.is_on(:audio_client) do
+      LopesUI.ROS.ProcessManager.start_process(%{name: :audio_client, cmd: "/Users/adityapawar/Documents/GitHub/A1S_App/env/bin/scrapyd", args: []})
+      # LopesUI.ROS.ProcessManager.start_process(%{name: :audio, cmd: "roslaunch", args: ["audio", "audio.launch"]})
+    else
+      LopesUI.ROS.ProcessManager.terminate_process(:audio_client)
+    end
+    IO.puts "audio server"
+    {:noreply, socket}
+  end
+
+  def handle_event("rosbridge", _unsigned_params, socket) do
+    if not LopesUI.ROS.Launch.is_on(:rosbridge) do
+      LopesUI.ROS.ProcessManager.start_process(%{name: :rosbridge, cmd: "/Users/adityapawar/Documents/GitHub/A1S_App/env/bin/scrapyd", args: []})
+      # LopesUI.ROS.ProcessManager.start_process(%{name: :audio, cmd: "roslaunch", args: ["audio", "audio.launch"]})
+    else
+      LopesUI.ROS.ProcessManager.terminate_process(:rosbridge)
+    end
+    IO.puts "rosbridge"
+    {:noreply, socket}
+  end
+
+  def handle_event("estop", _unsigned_params, socket) do
+    LopesUI.ROS.ProcessManager.terminate_process(:rosbridge)
+    LopesUI.ROS.ProcessManager.kill_all()
+    IO.puts "ESTOPPING"
+    {:noreply, socket}
+  end
   def terminate(_reason, _socket) do
     LopesUI.ROS.Launch.unregister(self())
   end
